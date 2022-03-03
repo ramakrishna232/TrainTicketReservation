@@ -1,0 +1,50 @@
+﻿@using System.Data.SqlClient
+@using System.Configuration
+@{ 
+    ViewBag.Title = "Available";
+}
+
+
+
+@{ 
+
+    string Connection = ConfigurationManager.ConnectionStrings["SqlConnection"].ConnectionString;
+    SqlConnection sqlConnection = new SqlConnection(Connection);
+    sqlConnection.Open();
+    SqlCommand sqlCommand = new SqlCommand("select * from Trains where Source='" + TempData["Source"] + "' and Destination='" + TempData["Destination"] + "'", sqlConnection);
+    SqlDataReader dataReader = sqlCommand.ExecuteReader();
+}
+
+        <div class=" container">
+            @*<tr>
+                <th>Source</th>
+                <th>
+                    Destination
+                </th>
+                <th>TrainNo</th>
+                <th>TrainName</th>
+                <th>ACTier_3</th>
+                <th>ACTier_2</th>
+                <th>ACTier_1</th>
+                <th>SL</th>
+                <th>SS</th>
+            </tr>*@
+            
+            @while(dataReader.Read())
+            {
+                <div class="card" style="width:500px;position:relative;height:100px;">
+                    <div class="card-header"><h1>@dataReader.GetValue(2)-@dataReader.GetValue(3)</h1></div>
+                  
+                
+                <div class="card" style="width:auto;height:70%">
+                    <div class="card" style="width:100px;height:100px;position:relative"><p>3A_@dataReader.GetValue(4)</p>@Html.ActionLink("BookNow","ACTier3","Availability")</div>
+                    <div class="card" style="width:100px;height:100px;position:relative;left:100px;top:-100px;"><p>2A_@dataReader.GetValue(5)</p>@Html.ActionLink("BookNow", "ACTier2", "Availability")</div>
+                    <div class="card" style="width:100px;height:100px;position:relative;left:200px;top:-200px;"><p>1A_@dataReader.GetValue(6)</p>@Html.ActionLink("BookNow", "ACTier1", "Availability")</div>
+                    <div class="card" style="width:100px;height:100px;position:relative;left:300px;top:-300px;"><p>SL_@dataReader.GetValue(7)</p>@Html.ActionLink("BookNow", "SLAvailable", "Availability")</div>
+                    <div class="card" style="width:100px;height:100px;position:relative;left:400px;top:-400px;"><p>SS_@dataReader.GetValue(8)</p>@Html.ActionLink("BookNow", "SSAvailable", "Availability")</div>
+                </div>
+        </div>
+    
+            }
+</div>
+        

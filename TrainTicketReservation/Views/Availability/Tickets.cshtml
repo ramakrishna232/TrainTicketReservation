@@ -1,0 +1,157 @@
+﻿@using System.Data.SqlClient
+@using System.Configuration
+@{
+    ViewBag.Title = "Tickets";
+    Layout = null;
+}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<div class="container">
+    <div class="card">
+        <p>We will send the transaction details to the email and mobile number provided by you</p>
+    </div>
+</div>
+<div class="container">
+    <div class="card">
+        <div class="jumbotron">
+            <div>
+                <p>you can share and download your ticket here</p>
+                <span class="glyphicon glyphicon-download" style="font-size:50px;position:relative;left:800px;"></span>
+                <span class="glyphicon glyphicon-share" style="font-size:50px;position:relative;left:900px;"></span>
+            </div>
+        </div>
+
+    </div>
+</div>
+@{
+    string Berth;
+    string Conncetion = ConfigurationManager.ConnectionStrings["SqlConnection"].ConnectionString;
+    SqlConnection sqlConnection = new SqlConnection(Conncetion);
+    sqlConnection.Open();
+    SqlCommand InfoCommand = new SqlCommand("select * from PassengerInfo", sqlConnection);
+    SqlCommand PassengerCommand = new SqlCommand("Select * from PassengersData", sqlConnection);
+    SqlDataReader InfoReader = InfoCommand.ExecuteReader();
+    InfoReader.Read();
+
+}
+
+<div class="container">
+    <div class="card">
+        @{
+            string Duration;
+            string Source = InfoReader.GetValue(0).ToString();
+            string Destination = InfoReader.GetValue(1).ToString();
+            if(Source == "Chennai" && Destination == "Nellore")
+            {
+                Duration = "3h20min";
+            }
+            else if (Source == "Nellore" && Destination == "Chennai")
+            {
+                Duration = "3h20min";
+            }
+            else if (Source == "Chennai" && Destination == "Hyderbad")
+            {
+                Duration = "14h30min";
+            }
+            else if (Source == "Chennai" && Destination == "Gudur")
+            {
+                Duration = "2h30min";
+            }
+            else if (Source == "Chennai" && Destination == "Banglore")
+            {
+                Duration = "8h45min";
+            }
+            else if (Source == "Chennai" && Destination == "Delhi")
+            {
+                Duration = "18h30min";
+            }
+            else if (Source == "Chennai" && Destination == "Bhuvneshwar")
+            {
+                Duration = "12h10min";
+            }
+            else
+            {
+                Duration = "0min";
+            }
+        }
+         <div class="card" style="width:50px;height:50px;"><h3>@InfoReader.GetValue(0)</h3></div>
+        <div class="card" style="width:200px;height:50px;position:relative;left:200px;top:-40px;">--------------@Duration----------------</div>
+         <div class="card" style="width:50px;height:50px;position:relative;left:500px;top:-115px;"><h3>@InfoReader.GetValue(1)</h3></div>
+           <div class="card-header" style="position:relative;top:-100px;"><h4>Passenger Details</h4><br />
+
+        </div>
+           <div class="card">
+               @{
+                   InfoReader.Close();
+                   SqlCommand TrainNoCommand = new SqlCommand("select TrainNo,TrainName from Trains where Source='"+Source+"'and Destination='"+Destination+"'",sqlConnection);
+                   SqlDataReader TraindataReader = TrainNoCommand.ExecuteReader();
+                   TraindataReader.Read();
+                   int TrainNo = (int)TraindataReader.GetValue(0);
+                   string TrainName = TraindataReader.GetValue(1).ToString();
+                   TraindataReader.Close();
+                   SqlDataReader dataReader = PassengerCommand.ExecuteReader();
+
+
+
+
+}
+               <table class="table-bordered" style="position:relative;top:-100px;">
+                   <tr>
+                       <th style="width:100px">TrainNo</th>
+                       <th style="width:100px;">TrainName</th>
+                       <th style="width:100px;">Source</th>
+                       <th style="width:100px;">Destination</th>
+                       <th style="width:100px;">Name</th>
+                       <th style="width:100px;">Age</th>
+                       <th style="width:100px;">Gender</th>
+                       <th style="width:100px;">Berth</th>
+                       <th style="width:100px;">Current Status</th>
+                   </tr>
+                   <tr>
+                       @while (dataReader.Read())
+                       {
+                           <td>@TrainNo</td>
+                           <td>@TrainName</td>
+                           <td>@Source</td>
+                           <td>@Destination</td>
+                           <td>@dataReader.GetValue(0)</td>
+                           <td>@dataReader.GetValue(1)</td>
+                           <td>@dataReader.GetValue(2)</td>
+                           <td>@dataReader.GetValue(4)</td>
+                           <td>Booked</td>
+                       }
+                   </tr>
+               </table>
+           </div>
+    </div>
+
+</div>
+<div class="container">
+    <h4>You can also book</h4>
+    <div class="btn btn-danger">Order Food-e-Catering</div>
+    <div class="btn btn-danger" style="position:relative;left:20px;">Order Food-Pantry Car</div>
+    <div class="btn btn-danger" style="position:relative;left:50px;">Hotel</div>
+    <div class="btn btn-danger" style="position:relative;left:75px;">Book Return Journey</div>
+    <div class="btn btn-danger" style="position:relative;left:100px;">Retiring Room</div>
+</div>
+<br />
+<div class="container">
+    <div class="card">
+        <div class="card-header">Information Message</div>
+        <p>IR recovers only 57% of cost of travel on an average</p>
+        <p>The Ticket is booked on a personal user ID.Its sale/purchase is an offence u/s 143 of the railways Act,1989</p>
+        <p>For enquiry and integrated railway helpline,please dial 139.</p>
+    </div>
+
+</div>
+@{ 
+    dataReader.Close();
+    SqlCommand DelpassengerCommand = new SqlCommand("truncate table PassengersData", sqlConnection);
+    DelpassengerCommand.ExecuteNonQuery();
+    SqlCommand DelpassengerInfo = new SqlCommand("truncate table PassengerInfo", sqlConnection);
+    DelpassengerInfo.ExecuteNonQuery();
+}

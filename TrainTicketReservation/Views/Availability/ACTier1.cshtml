@@ -1,0 +1,181 @@
+﻿@using System.Data.SqlClient
+@using System.Configuration
+@{
+    ViewBag.Title = "ACTier1";
+}
+@{
+    string Connection = ConfigurationManager.ConnectionStrings["SqlConnection"].ConnectionString;
+    SqlConnection sqlConnection = new SqlConnection(Connection);
+    sqlConnection.Open();
+    SqlCommand sqlCommand = new SqlCommand("select * from Trains", sqlConnection);
+    SqlDataReader dataReader = sqlCommand.ExecuteReader();
+    dataReader.Read();
+}
+
+<div class="container">
+    <div class="card" style="height:100px;">
+        <h1>@dataReader.GetValue(3)</h1>
+        <p>@dataReader.GetValue(2)  |Departs on:<i style="color:green">M T W T F S S</i></p>
+    </div>
+    <div class="card" style="position:relative;left:600px;top:-100px;">
+        <p>Availability Status</p>
+        <div style="width:100px;height:50px;border:1px solid black">
+            <p>1A</p>
+            <p style="color:green;">AVBL_@dataReader.GetValue(6)</p>
+        </div>
+    </div>
+</div>
+@{dataReader.Close(); }
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">Get Free Cancellation</div>
+        <div style="width:800px;height:180px;border:1px solid black;padding:20px;">
+
+            <input type="radio" name="cancel" value="Yes" onclick="displayRadioValue()" /><label>Yes, I want full refund upon cancellation</label>
+            <p></p>
+            <input type="radio" name="cancel" value="No" onclick="displayRadioValue()" /><label> I am willing to pay the charges upon cancellation</label>
+            <p></p>
+            <p style="opacity:0.5">*Ticket can only be cancelled before chart preparation</p>
+            <p id="TextContent" style="background-color:lightgreen"></p>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="card" style="width:800px;height:auto;position:relative;top:10px;border:1px solid black;">
+        <button type="button" class="btn btn-lg" data-toggle="modal" data-target="#myModal">+addTraveller</button>
+    </div>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add passenger</h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.Label("Name")
+                        @Html.TextBox("Name")<br />
+                        @Html.Label("Age")
+                        @Html.TextBox("Age")<br />
+                        @Html.Label("Gender")
+                        <i><input type="radio" name="gender" value="Male" />Male</i>
+                        <i><input type="radio" name="gender" value="Female" />Female</i><br />
+                        <input type="submit" />
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <p><h3>Contact Information</h3>(We'll send your ticket and status update here)</p>
+    <div class="card">
+        <label>Email</label><br />
+        <input type="text" style="width:250px" />
+        <label style="position:relative;top:-30px;left:50px;">Mobile Number</label><br />
+        <input type="number" style="position:relative;width:250px;left:300px;top:-30px;" />
+    </div>
+</div>
+<div class="container">
+    <p><h3>Address Details</h3>(Please fill your Destination Details)</p>
+    <div class="card">
+        <label>Address Line<i style="color:red">*</i></label><br />
+        <input type="text" style="width:100%" />
+        <label style="position:relative;top:-25px;left:60px;">PinCode<i style="color:red">*</i></label>
+        <input type="number" style="width:100%" autocomplete="off" /><br />
+        <table>
+            <tr>
+                <td>City<i style="color:red">*</i></td>
+                <td style="position:relative;left:30px;">State<i style="color:red">*</i></td>
+                <td style="position:relative;left:30px;">PostOffice<i style="color:red">*</i></td>
+
+            </tr>
+            <tr>
+                <td><input type="text" /></td>
+                <td style="position:relative;left:20px;"><input type="text" /></td>
+                <td style="position:relative;left:30px;"><input type="text" /></td>
+
+            </tr>
+        </table>
+    </div>
+
+</div>
+<div class="container">
+    <div class="card">
+        <h3>Additional preference</h3>
+        <p>Choose one option for assured lower berth or same coach</p>
+        <input type="radio" name="userChoice" value="none" checked /> None<br />
+        <input type="radio" name="userChoice" value="Samecoach" />  Book,if all berths are allocated in same coach<br />
+        <input type="radio" name="userChoice" value="1lower" />  Book,if 1 lower berth is allocated<br />
+        <input type="radio" name="userChoice" value="2lower" />  Book,if 2 lower berths are allocated<br />
+        <h3>Other options</h3>
+        <input type="checkbox" name="otherChoice" value="Allseatsconfirmed" />  Book only if confirm berths are allocated<br />
+        <input type="checkbox" name="otherChoice" value="auto-upgradation" />  Consider for auto-upgradation
+    </div>
+</div>
+<div class="container">
+    <div class="card">
+        <h3>Would you like to take Travel Insurance for &#x20B9 0.35 per person?</h3>
+        <input type="radio" name="Insurance" value="yes" />   Yes, and I accept the Terms&Conditions<br />
+        <input type="radio" name="Insurance" value="No" checked />    No,I don't want travel insurance
+    </div>
+</div>
+<div class="card" style="border:1px solid black;width:250px;height:100px;position:relative;left:1000px;top:-1000px;">
+    @{
+        int Res_Fare = 20;
+        int SF_Fare = 30;
+        SqlCommand FareCommand = new SqlCommand("select * from TrainFares", sqlConnection);
+        SqlDataReader FareReader = FareCommand.ExecuteReader();
+        FareReader.Read();
+        int Total = (int)FareReader.GetValue(3) + Res_Fare + SF_Fare;
+    }
+    <table>
+        <tr>
+            <td>Base fare per adult</td>
+            <td>    </td>
+            <td>&#x20B9 @FareReader.GetValue(3)</td>
+        </tr>
+
+        <tr> <td>Reservation Fare</td><td>    </td><td>&#x20B9 @Res_Fare</td></tr>
+
+
+        <tr><td>Superfast Fare</td><td>&#x20B9 @SF_Fare</td></tr>
+        <tr><td>Total price per adult</td><td>    </td><td>&#x20B9 @Total</td></tr>
+
+    </table>
+    @{ FareReader.Close();}
+</div>
+<div class="container">
+    <button style="position:relative;left:1000px;width:100px;">@Html.ActionLink("Payment", "Payment", "Availability")</button>
+</div>
+<script>
+    function displayRadioValue() {
+        var ele = document.getElementsByTagName('input');
+
+        for (i = 0; i < ele.length; i++) {
+            if (ele[i].type = "radio") {
+                if (ele[i].checked) {
+                    if (ele[i].value == "Yes") {
+                        document.getElementById("TextContent").innerHTML = "Great Choice! Free Cancellation before chart preparation";
+                    }
+                    if (ele[i].value == "No") {
+                        document.getElementById("TextContent").innerHTML = "Mr. Gupta had to cancel his train ticket worth ₹3000 at the last moment. Since he chose free cancellation he did not had to pay ₹1500 penalty and got full refund.";
+                    }
+                }
+            }
+        }
+
+
+    }
+
+</script>
+
+

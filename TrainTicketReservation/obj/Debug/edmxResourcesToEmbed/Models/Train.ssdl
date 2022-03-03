@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TrainModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Trains">
+    <Key>
+      <PropertyRef Name="Trainno" />
+    </Key>
+    <Property Name="Source" Type="varchar" MaxLength="20" />
+    <Property Name="Destination" Type="varchar" MaxLength="20" />
+    <Property Name="Trainno" Type="int" Nullable="false" />
+    <Property Name="TrainName" Type="varchar" MaxLength="20" />
+    <Property Name="ACTier_3" Type="int" />
+    <Property Name="ACTier_2" Type="int" />
+    <Property Name="ACTier_1" Type="int" />
+    <Property Name="SLAvailable" Type="int" />
+    <Property Name="SSAvailable" Type="int" />
+    <Property Name="ACTier_3Fare" Type="int" />
+    <Property Name="ACTier_2Fare" Type="int" />
+    <Property Name="ACTier_1Fare" Type="int" />
+    <Property Name="SLFare" Type="int" />
+    <Property Name="SSFare" Type="int" />
+  </EntityType>
+  <EntityContainer Name="TrainModelStoreContainer">
+    <EntitySet Name="Trains" EntityType="Self.Trains" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

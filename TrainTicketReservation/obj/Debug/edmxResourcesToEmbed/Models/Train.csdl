@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TrainModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Train">
+    <Key>
+      <PropertyRef Name="Trainno" />
+    </Key>
+    <Property Name="Source" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Destination" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Trainno" Type="Int32" Nullable="false" />
+    <Property Name="TrainName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ACTier_3" Type="Int32" />
+    <Property Name="ACTier_2" Type="Int32" />
+    <Property Name="ACTier_1" Type="Int32" />
+    <Property Name="SLAvailable" Type="Int32" />
+    <Property Name="SSAvailable" Type="Int32" />
+    <Property Name="ACTier_3Fare" Type="Int32" />
+    <Property Name="ACTier_2Fare" Type="Int32" />
+    <Property Name="ACTier_1Fare" Type="Int32" />
+    <Property Name="SLFare" Type="Int32" />
+    <Property Name="SSFare" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="TrainEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Trains" EntityType="Self.Train" />
+  </EntityContainer>
+</Schema>
