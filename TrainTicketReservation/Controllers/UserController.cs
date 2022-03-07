@@ -25,6 +25,7 @@ namespace TrainTicketReservation.Controllers
 
             ViewBag.Username = formCollection["UserName"].ToString();
             ViewBag.Password = formCollection["Password"].ToString();
+            TempData["UserName"] = formCollection["UserName"].ToString();
             SqlConnection sqlConnection = new SqlConnection(Connection);
             sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("select * from Customer where UserName='" + ViewBag.Username + "'and Password='" + ViewBag.Password + "'", sqlConnection);
@@ -38,6 +39,11 @@ namespace TrainTicketReservation.Controllers
             {
                 return View();
             }
+        }
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            return Redirect("/Home/Index");
         }
         public ActionResult Register()
         {

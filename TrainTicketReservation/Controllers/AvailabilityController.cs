@@ -7,12 +7,13 @@ using System.Data.SqlClient;
 using System.Configuration;
 namespace TrainTicketReservation.Controllers
 {
+    [Authorize]
     public class AvailabilityController : Controller
     {
         string Connection = ConfigurationManager.ConnectionStrings["SqlConnection"].ConnectionString;
         
         // GET: Availability
-        [Authorize]
+        
         public ActionResult Available()
         {
             

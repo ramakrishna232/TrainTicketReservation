@@ -1,4 +1,4 @@
-﻿!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -27,9 +27,14 @@
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                 <li>@Html.ActionLink("About", "About", "Home")</li>
                 <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li>Hi,Username<span class="glyphicon glyphicon-user"></span></li>
+            <ul class="nav navbar-nav ">
+                <li class="text-info" style="top:10px;position:relative;left:800px;">
+                    Hi,@TempData["UserName"] <span class="glyphicon glyphicon-user" style="font-size:25px;"></span>
+                    
+                </li>
+                <li style="position:relative;left:800px;">@Html.ActionLink("Logout", "LogOut", "User")</li>
             </ul>
         </div>
 

@@ -2,6 +2,7 @@
 @using System.Configuration
 @{
     ViewBag.Title = "ACTier1";
+    Layout = "~/Views/Shared/Login.cshtml";
 }
 @{
     string Connection = ConfigurationManager.ConnectionStrings["SqlConnection"].ConnectionString;
@@ -152,6 +153,17 @@
 
     </table>
     @{ FareReader.Close();}
+</div>
+<div class="dropdown show">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dropdown link
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+    </div>
 </div>
 <div class="container">
     <button style="position:relative;left:1000px;width:100px;">@Html.ActionLink("Payment", "Payment", "Availability")</button>

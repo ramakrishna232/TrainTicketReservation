@@ -22,23 +22,64 @@
             {
                 @Html.Label("Name")
                 @Html.TextBox("Name")<br /><br />
+                <span class="Errorname" style="color:red"></span>
+
                 @Html.Label("Age")
                 @Html.TextBox("Age")<br /><br />
+                <span class="ErrorAge" style="color:red"></span>
                 @Html.Label("MobNo")
                 @Html.TextBox("MobNo")<br />
+                <span class="ErrorMobNo" style="color:red"></span>
                 @Html.Label("Gender")
                 <i><input type="radio" name="gender" value="Male" />Male</i>
                 <i><input type="radio" name="gender" value="Female" />Female</i><br />
+                <span class="ErrorGender" style="color:red"></span>
                 @Html.Label("Email")
                 @Html.TextBox("Email")<br />
+                <span class="ErrorEmail" style="color:red"></span>
                 @Html.Label("UserName")
 
                 @Html.TextBox("UserName")<br /><br />
+                <span class="ErrorUserName" style="color:red"></span>
                 @Html.Label("Password")
                 @Html.Password("Password")<br /><br />
-                <input type="submit" class="btn btn-primary" style="position:relative;left:100px;" />
+                <span class="ErrorPassword" style="color:red"></span>
+                <input type="submit" class="btn btn-primary" style="position:relative;left:100px;" onsubmit="allValidate()" />
             }
         </div>
     </div>
+
+    <script>
+        function allValidate() {
+            var validated = true;
+            if (!validate(Name)) {
+                validated = false;
+                 
+            }
+            if (!validate(age)) {
+                validated = false;
+            }
+            if (!validate(MobNo)) {
+                validated = false;
+
+            }
+            if (!validate(Gender)) {
+                validated = false;
+            }
+            if (!validate(Email)) {
+                validated = false;
+            }
+            if (!validate(UserName)) {
+                validated = false;
+            }
+            if (!validated(Password)) {
+                validated = false;
+            }
+            return validated;
+        }
+        function validate(Name) {
+            var name = document.getElementById("Name")
+        }
+    </script>
 </body>
 </html>
