@@ -130,11 +130,34 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TrainFaresController.cs" />
+    <Compile Include="Controllers\TrainsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\RouteDetails.cs" />
+    <Compile Include="Models\Train.cs">
+      <DependentUpon>Trains.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TrainFare.cs">
+      <DependentUpon>Trains.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Trains.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Trains.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Trains.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Trains.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Trains.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Trains.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -147,9 +170,26 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\Trains.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Trains.edmx</DependentUpon>
+      <LastGenOutput>Trains.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Trains.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Trains.edmx</DependentUpon>
+      <LastGenOutput>Trains.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App_Data\Pictures\train.webp" />
+    <EntityDeploy Include="Models\Trains.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Trains.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Trains.edmx.diagram">
+      <DependentUpon>Trains.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -186,6 +226,16 @@
     <Content Include="Views\Shared\Login.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\Trains\Create.cshtml" />
+    <Content Include="Views\Trains\Delete.cshtml" />
+    <Content Include="Views\Trains\Details.cshtml" />
+    <Content Include="Views\Trains\Edit.cshtml" />
+    <Content Include="Views\Trains\Index.cshtml" />
+    <Content Include="Views\TrainFares\Create.cshtml" />
+    <Content Include="Views\TrainFares\Delete.cshtml" />
+    <Content Include="Views\TrainFares\Details.cshtml" />
+    <Content Include="Views\TrainFares\Edit.cshtml" />
+    <Content Include="Views\TrainFares\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

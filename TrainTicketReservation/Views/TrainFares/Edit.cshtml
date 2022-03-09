@@ -1,0 +1,46 @@
+﻿@model TrainTicketReservation.Models.TrainFare
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/Login.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>TrainFare</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.TrainNo, "TrainNo", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("TrainNo", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TrainNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.ACTier3_Fares)
+
+        @Html.HiddenFor(model => model.ACTier2_Fares)
+
+        @Html.HiddenFor(model => model.ACTier1_Fares)
+
+        @Html.HiddenFor(model => model.SLFare)
+
+        @Html.HiddenFor(model => model.SSFare)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

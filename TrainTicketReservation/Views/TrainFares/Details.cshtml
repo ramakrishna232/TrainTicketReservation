@@ -1,0 +1,27 @@
+﻿@model TrainTicketReservation.Models.TrainFare
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Login.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TrainFare</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Train.Source)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Train.Source)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TrainModelStoreContainer" CdmEntityContainer="TrainReservation">
+    <EntitySetMapping Name="Trains">
+      <EntityTypeMapping TypeName="TrainModel.Train">
+        <MappingFragment StoreEntitySet="Trains">
+          <ScalarProperty Name="Source" ColumnName="Source" />
+          <ScalarProperty Name="Destination" ColumnName="Destination" />
+          <ScalarProperty Name="TrainNo" ColumnName="TrainNo" />
+          <ScalarProperty Name="TrainName" ColumnName="TrainName" />
+          <ScalarProperty Name="ACTier_3" ColumnName="ACTier_3" />
+          <ScalarProperty Name="ACTier_2" ColumnName="ACTier_2" />
+          <ScalarProperty Name="ACTier_1" ColumnName="ACTier_1" />
+          <ScalarProperty Name="SLAvailable" ColumnName="SLAvailable" />
+          <ScalarProperty Name="SSAvailable" ColumnName="SSAvailable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TrainFares">
+      <EntityTypeMapping TypeName="TrainModel.TrainFare">
+        <MappingFragment StoreEntitySet="TrainFares">
+          <ScalarProperty Name="TrainNo" ColumnName="TrainNo" />
+          <ScalarProperty Name="ACTier3_Fares" ColumnName="ACTier3_Fares" />
+          <ScalarProperty Name="ACTier2_Fares" ColumnName="ACTier2_Fares" />
+          <ScalarProperty Name="ACTier1_Fares" ColumnName="ACTier1_Fares" />
+          <ScalarProperty Name="SLFare" ColumnName="SLFare" />
+          <ScalarProperty Name="SSFare" ColumnName="SSFare" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

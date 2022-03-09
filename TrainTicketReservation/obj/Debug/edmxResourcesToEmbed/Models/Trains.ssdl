@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TrainModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Train.dbo.TrainFares' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TrainFares">
+    <Key>
+      <PropertyRef Name="ACTier3_Fares" />
+      <PropertyRef Name="ACTier2_Fares" />
+      <PropertyRef Name="ACTier1_Fares" />
+      <PropertyRef Name="SLFare" />
+      <PropertyRef Name="SSFare" />
+    </Key>
+    <Property Name="TrainNo" Type="int" />
+    <Property Name="ACTier3_Fares" Type="int" Nullable="false" />
+    <Property Name="ACTier2_Fares" Type="int" Nullable="false" />
+    <Property Name="ACTier1_Fares" Type="int" Nullable="false" />
+    <Property Name="SLFare" Type="int" Nullable="false" />
+    <Property Name="SSFare" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Trains">
+    <Key>
+      <PropertyRef Name="TrainNo" />
+    </Key>
+    <Property Name="Source" Type="varchar" MaxLength="20" />
+    <Property Name="Destination" Type="varchar" MaxLength="20" />
+    <Property Name="TrainNo" Type="int" Nullable="false" />
+    <Property Name="TrainName" Type="varchar" MaxLength="20" />
+    <Property Name="ACTier_3" Type="int" Nullable="false" />
+    <Property Name="ACTier_2" Type="int" Nullable="false" />
+    <Property Name="ACTier_1" Type="int" Nullable="false" />
+    <Property Name="SLAvailable" Type="int" Nullable="false" />
+    <Property Name="SSAvailable" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="fk">
+    <End Role="Trains" Type="Self.Trains" Multiplicity="0..1" />
+    <End Role="TrainFares" Type="Self.TrainFares" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trains">
+        <PropertyRef Name="TrainNo" />
+      </Principal>
+      <Dependent Role="TrainFares">
+        <PropertyRef Name="TrainNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TrainModelStoreContainer">
+    <EntitySet Name="Trains" EntityType="Self.Trains" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TrainFares" EntityType="Self.TrainFares" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TrainFares].[TrainNo] AS [TrainNo], 
+    [TrainFares].[ACTier3_Fares] AS [ACTier3_Fares], 
+    [TrainFares].[ACTier2_Fares] AS [ACTier2_Fares], 
+    [TrainFares].[ACTier1_Fares] AS [ACTier1_Fares], 
+    [TrainFares].[SLFare] AS [SLFare], 
+    [TrainFares].[SSFare] AS [SSFare]
+    FROM [dbo].[TrainFares] AS [TrainFares]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="fk" Association="Self.fk">
+      <End Role="Trains" EntitySet="Trains" />
+      <End Role="TrainFares" EntitySet="TrainFares" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
