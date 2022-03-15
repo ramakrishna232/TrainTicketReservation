@@ -2,7 +2,7 @@
 @using System.Configuration
 @{
     ViewBag.Title = "Tickets";
-    Layout = null;
+    Layout = "~/Views/Shared/Login.cshtml";
 }
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -148,6 +148,7 @@
     </div>
 
 </div>
+
 @{ 
     dataReader.Close();
     SqlCommand DelpassengerCommand = new SqlCommand("truncate table PassengersData", sqlConnection);

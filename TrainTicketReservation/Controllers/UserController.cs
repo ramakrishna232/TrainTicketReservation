@@ -11,6 +11,8 @@ namespace TrainTicketReservation.Controllers
 {
     public class UserController : Controller
     {
+        
+
         // GET: User
         string Connection = ConfigurationManager.ConnectionStrings["SqlConnection"].ConnectionString;
 
@@ -32,8 +34,12 @@ namespace TrainTicketReservation.Controllers
             SqlDataReader dataReader = sqlCommand.ExecuteReader();
             if (dataReader.Read())
             {
+                dataReader.Close();
+                SqlCommand userCommand = new SqlCommand("insert into usertab values('" + ViewBag.Username + "')", sqlConnection);
+                userCommand.ExecuteNonQuery();
                 FormsAuthentication.SetAuthCookie(ViewBag.Username, false);
                 return Redirect(ReturnUrl);
+                
             }
             else
             {

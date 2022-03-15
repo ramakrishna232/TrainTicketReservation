@@ -29,7 +29,7 @@ namespace TrainTicketReservation.Controllers
         public ActionResult About()
         {
             return View();
-        }
+        }   
         
 
         public ActionResult Contact()

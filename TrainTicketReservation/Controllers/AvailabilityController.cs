@@ -34,7 +34,11 @@ namespace TrainTicketReservation.Controllers
             ViewBag.Gender = formCollection["gender"].ToString();
             SqlConnection sqlConnection = new SqlConnection(Connection);
             sqlConnection.Open();
-            
+            SqlCommand userCommand = new SqlCommand("select * from usertab", sqlConnection);
+            SqlDataReader userReader = userCommand.ExecuteReader();
+            userReader.Read();
+            string userName = userReader.GetValue(0).ToString();
+            userReader.Close();
            SqlCommand TicketsCommand = new SqlCommand("select ACTier_3 from Trains", sqlConnection);
             SqlDataReader dataReader = TicketsCommand.ExecuteReader();
             dataReader.Read();
@@ -45,7 +49,7 @@ namespace TrainTicketReservation.Controllers
                 result = 217 - Available;
                 
                 
-                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/B1-" + result + "','3A')", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/B1-" + result + "','3A','"+userName+"','" + DateTime.Now.Date + "')", sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 SqlCommand passengerCommand = new SqlCommand("insert into PassengersData values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','3A','CN/RF/B1-" + result + "')", sqlConnection);
                 passengerCommand.ExecuteNonQuery();
@@ -55,7 +59,7 @@ namespace TrainTicketReservation.Controllers
                 result = 145 - Available;
                 
                 
-                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/B2-" + result + "','3A')", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/B2-" + result + "','3A','" + userName + "','" + DateTime.Now.Date + "')", sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 SqlCommand passengerCommand = new SqlCommand("insert into PassengersData values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','3A','CN/RF/B2-" + result + "')", sqlConnection);
                 passengerCommand.ExecuteNonQuery();
@@ -65,7 +69,7 @@ namespace TrainTicketReservation.Controllers
                 result = 73 - Available;
                 Berth = "CN/RF/B3-'" + result + "'";
                 
-                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/B3-" + result + "','3A')", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/B3-" + result + "','3A','" + userName+ "','" + DateTime.Now.Date + "')", sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 SqlCommand passengerCommand = new SqlCommand("insert into PassengersData values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','3A','CN/RF/B3-" + result + "')", sqlConnection);
                 passengerCommand.ExecuteNonQuery();
@@ -101,6 +105,11 @@ namespace TrainTicketReservation.Controllers
             ViewBag.Gender = formCollection["gender"].ToString();
             SqlConnection sqlConnection = new SqlConnection(Connection);
             sqlConnection.Open();
+            SqlCommand userCommand = new SqlCommand("select * from usertab", sqlConnection);
+            SqlDataReader userReader = userCommand.ExecuteReader();
+            userReader.Read();
+            string userName = userReader.GetValue(0).ToString();
+            userReader.Close();
             SqlCommand TicketsCommand = new SqlCommand("select ACTier_2 from Trains", sqlConnection);
             SqlDataReader dataReader = TicketsCommand.ExecuteReader();
             dataReader.Read();
@@ -112,7 +121,7 @@ namespace TrainTicketReservation.Controllers
                 result = 145 - Available;
 
 
-                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/A1-" + result + "','2A')", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/A1-" + result + "','2A','" + userName + "','" + DateTime.Now.Date + "')", sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 SqlCommand passengerCommand = new SqlCommand("insert into PassengersData values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','2A','CN/RF/A1-" + result + "')", sqlConnection);
                 passengerCommand.ExecuteNonQuery();
@@ -122,7 +131,7 @@ namespace TrainTicketReservation.Controllers
                 result = 73 - Available;
                 Berth = "CN/RF/B3-'" + result + "'";
 
-                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/A2-" + result + "','2A')", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/A2-" + result + "','2A','" + userName+ "','" + DateTime.Now.Date + "')", sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 SqlCommand passengerCommand = new SqlCommand("insert into PassengersData values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','2A','CN/RF/A2-" + result + "')", sqlConnection);
                 passengerCommand.ExecuteNonQuery();
@@ -161,6 +170,11 @@ namespace TrainTicketReservation.Controllers
             ViewBag.Gender = formCollection["gender"].ToString();
             SqlConnection sqlConnection = new SqlConnection(Connection);
             sqlConnection.Open();
+            SqlCommand userCommand = new SqlCommand("select * from usertab", sqlConnection);
+            SqlDataReader userReader = userCommand.ExecuteReader();
+            userReader.Read();
+            string userName = userReader.GetValue(0).ToString();
+            userReader.Close();
             SqlCommand TicketsCommand = new SqlCommand("select ACTier_1 from Trains", sqlConnection);
             SqlDataReader dataReader = TicketsCommand.ExecuteReader();
             dataReader.Read();
@@ -173,7 +187,7 @@ namespace TrainTicketReservation.Controllers
                 result = 73 - Available;
                 Berth = "CN/RF/B3-'" + result + "'";
 
-                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/HA1-" + result + "','HA1')", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/HA1-" + result + "','HA1','" + userName + "','" + DateTime.Now.Date + "')", sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 SqlCommand passengerCommand = new SqlCommand("insert into PassengersData values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','HA1','CN/RF/HA1-" + result + "')", sqlConnection);
                 passengerCommand.ExecuteNonQuery();
@@ -210,6 +224,11 @@ namespace TrainTicketReservation.Controllers
             ViewBag.Gender = formCollection["gender"].ToString();
             SqlConnection sqlConnection = new SqlConnection(Connection);
             sqlConnection.Open();
+            SqlCommand userCommand = new SqlCommand("select * from usertab", sqlConnection);
+            SqlDataReader userReader = userCommand.ExecuteReader();
+            userReader.Read();
+            string userName = userReader.GetValue(0).ToString();
+            userReader.Close();
             SqlCommand TicketsCommand = new SqlCommand("select SLAvailable from Trains", sqlConnection);
             SqlDataReader dataReader = TicketsCommand.ExecuteReader();
             dataReader.Read();
@@ -220,7 +239,7 @@ namespace TrainTicketReservation.Controllers
                 result = 577 - Available;
 
 
-                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/S1-" + result + "','SL')", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/S1-" + result + "','SL','" + userName + "','" + DateTime.Now.Date + "')", sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 SqlCommand passengerCommand = new SqlCommand("insert into PassengersData values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','SL','CN/RF/S1-'" + result + ")", sqlConnection);
                 passengerCommand.ExecuteNonQuery();
@@ -230,7 +249,7 @@ namespace TrainTicketReservation.Controllers
                 result = 505 - Available;
 
 
-                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/S2-" + result + "','SL')", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/S2-" + result + "','SL','" + userName + "','" + DateTime.Now.Date + "')", sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 SqlCommand passengerCommand = new SqlCommand("insert into PassengersData values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','SL','CN/RF/S2-'" + result + ")", sqlConnection);
                 passengerCommand.ExecuteNonQuery();
@@ -240,7 +259,7 @@ namespace TrainTicketReservation.Controllers
                 result = 433 - Available;
 
 
-                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/S3-" + result + "','SL')", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/S3-" + result + "','SL','" + userName + "','" + DateTime.Now.Date + "')", sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 SqlCommand passengerCommand = new SqlCommand("insert into PassengersData values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','SL','CN/RF/S3-'" + result + ")", sqlConnection);
                 passengerCommand.ExecuteNonQuery();
@@ -250,7 +269,7 @@ namespace TrainTicketReservation.Controllers
                 result = 361 - Available;
 
 
-                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/S4-" + result + "','SL')", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/S4-" + result + "','SL','" + userName + "','" + DateTime.Now.Date + "')", sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 SqlCommand passengerCommand = new SqlCommand("insert into PassengersData values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','SL','CN/RF/S4-'" + result + ")", sqlConnection);
                 passengerCommand.ExecuteNonQuery();
@@ -260,7 +279,7 @@ namespace TrainTicketReservation.Controllers
                 result = 289 - Available;
 
 
-                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/S5-" + result + "','SL')", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/S5-" + result + "','SL','" + userName + "','" + DateTime.Now.Date + "')", sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 SqlCommand passengerCommand = new SqlCommand("insert into PassengersData values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','SL','CN/RF/S5-'" + result + ")", sqlConnection);
                 passengerCommand.ExecuteNonQuery();
@@ -270,7 +289,7 @@ namespace TrainTicketReservation.Controllers
                 result = 217 - Available;
 
 
-                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/S6-" + result + "','SL')", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/S6-" + result + "','SL','" + userName + "','" + DateTime.Now.Date + "')", sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 SqlCommand passengerCommand = new SqlCommand("insert into PassengersData values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','SL','CN/RF/S6-'" + result + ")", sqlConnection);
                 passengerCommand.ExecuteNonQuery();
@@ -280,7 +299,7 @@ namespace TrainTicketReservation.Controllers
                 result = 145 - Available;
 
 
-                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/S7-" + result + "','SL')", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/S7-" + result + "','SL','" + userName + "','" + DateTime.Now.Date + "')", sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 SqlCommand passengerCommand = new SqlCommand("insert into PassengersData values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','SL','CN/RF/S7-'" + result + ")", sqlConnection);
                 passengerCommand.ExecuteNonQuery();
@@ -290,7 +309,7 @@ namespace TrainTicketReservation.Controllers
                 result = 73 - Available;
                 Berth = "CN/RF/B3-'" + result + "'";
 
-                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/S8-" + result + "','SL')", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/S8-" + result + "','SL','" + userName + "','" + DateTime.Now.Date + "')", sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 SqlCommand passengerCommand = new SqlCommand("insert into PassengersData values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','SL','CN/RF/S8-'"+result+")", sqlConnection);
                 passengerCommand.ExecuteNonQuery();
@@ -327,6 +346,11 @@ namespace TrainTicketReservation.Controllers
             ViewBag.Gender = formCollection["gender"].ToString();
             SqlConnection sqlConnection = new SqlConnection(Connection);
             sqlConnection.Open();
+            SqlCommand userCommand = new SqlCommand("select * from usertab", sqlConnection);
+            SqlDataReader userReader = userCommand.ExecuteReader();
+            userReader.Read();
+            string userName = userReader.GetValue(0).ToString();
+            userReader.Close();
             SqlCommand TicketsCommand = new SqlCommand("select SSAvailable from Trains", sqlConnection);
             SqlDataReader dataReader = TicketsCommand.ExecuteReader();
             dataReader.Read();
@@ -337,7 +361,7 @@ namespace TrainTicketReservation.Controllers
                 result = 145 - Available;
 
 
-                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/D1-" + result + "','SS')", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/D1-" + result + "','SS','" + userName + "','" + DateTime.Now.Date + "')", sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 SqlCommand passengerCommand = new SqlCommand("insert into PassengersData values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','SS','CN/RF/D1-" + result + "')", sqlConnection);
                 passengerCommand.ExecuteNonQuery();
@@ -347,7 +371,7 @@ namespace TrainTicketReservation.Controllers
                 result = 145 - Available;
 
 
-                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/D2-" + result + "','SS')", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("insert into passengers values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','CN/RF/D2-" + result + "','SS','" + userName + "','" + DateTime.Now.Date + "')", sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 SqlCommand passengerCommand = new SqlCommand("insert into PassengersData values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.Gender + "','SS','CN/RF/D2-" + result + "')", sqlConnection);
                 passengerCommand.ExecuteNonQuery();

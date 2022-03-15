@@ -1,0 +1,73 @@
+﻿@using System.Data.SqlClient
+@using System.Configuration
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Login.cshtml";
+}
+@{ 
+    string Connection = ConfigurationManager.ConnectionStrings["SqlConnection"].ConnectionString;
+    SqlConnection sqlConnection = new SqlConnection(Connection);
+    sqlConnection.Open();
+    SqlCommand sqlCommand = new SqlCommand("select * from Customer", sqlConnection);
+    SqlDataReader dataReader = sqlCommand.ExecuteReader();
+
+}
+<h3 style="position:relative;left:80px;">Users</h3>
+<table class="table-bordered" style="position:relative;left:100px;width:800px;">
+    <tr>
+        <th style="text-align:center">Name</th>
+        <th style="text-align:center">Age</th>
+        <th style="text-align:center">MobNo</th>
+        <th style="text-align:center">Gender</th>
+        <th style="text-align:center">Email</th>
+        <th style="text-align:center">UserName</th>
+        <th style="text-align:center">Password</th>
+    </tr>
+    
+        @while (dataReader.Read())
+        {
+            <tr style="text-align:center">
+            <td>@dataReader.GetValue(0)</td>
+            <td>@dataReader.GetValue(1)</td>
+            <td>@dataReader.GetValue(2)</td>
+            <td>@dataReader.GetValue(3)</td>
+            <td>@dataReader.GetValue(4)</td>
+            <td>@dataReader.GetValue(5)</td>
+            <td>@dataReader.GetValue(6)</td>
+            </tr>
+        }
+    
+</table>
+@{ dataReader.Close();}
+<h3>Passengers List</h3>
+@{ 
+    SqlCommand passengerCommand = new SqlCommand("select * from Passengers", sqlConnection);
+    SqlDataReader passengerReader = passengerCommand.ExecuteReader();
+
+
+}
+<table class="table-bordered" style="position:relative;left:100px;width:800px;">
+    <tr>
+        <th style="text-align:center">Name</th>
+        <th style="text-align:center">Age</th>
+        <th style="text-align:center">Gender</th>
+        <th style="text-align:center">MobNo</th>
+        <th style="text-align:center">Coach</th>
+        <th style="text-align:center">UserName</th>
+        <th style="text-align:center">BookedOn</th>
+    </tr>
+
+    @while (passengerReader.Read())
+    {
+        <tr style="text-align:center">
+            <td>@passengerReader.GetValue(0)</td>
+            <td>@passengerReader.GetValue(1)</td>
+            <td>@passengerReader.GetValue(2)</td>
+            <td>@passengerReader.GetValue(3)</td>
+            <td>@passengerReader.GetValue(4)</td>
+            <td>@passengerReader.GetValue(5)</td>
+            <td>@passengerReader.GetValue(6)</td>
+        </tr>
+    }
+
+</table>
