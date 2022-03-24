@@ -41,6 +41,17 @@ namespace TrainTicketReservation.Controllers
                 return Redirect(ReturnUrl);
                 
             }
+            dataReader.Close();
+            SqlCommand AdminCommand = new SqlCommand("select * from Admin where UserName='" + ViewBag.Username + "' and password='" + ViewBag.Password + "'", sqlConnection);
+            SqlDataReader AdminReader = AdminCommand.ExecuteReader();
+
+            if(AdminReader.Read())
+            {
+                
+                FormsAuthentication.SetAuthCookie(ViewBag.Username, false);
+                return Redirect(ReturnUrl);
+                AdminReader.Close();
+            }
             else
             {
                 return View();
@@ -70,6 +81,10 @@ namespace TrainTicketReservation.Controllers
             SqlCommand sqlCommand = new SqlCommand("insert into Customer values('" + ViewBag.Name + "','" + ViewBag.Age + "','" + ViewBag.MobNo + "','" + ViewBag.Gender + "','" + ViewBag.Email + "','" + ViewBag.UserNAme + "','" + ViewBag.Password + "')", sqlConnection);
             sqlCommand.ExecuteNonQuery();
             return Redirect("Login");
+        }
+        public ActionResult MyBookings()
+        {
+            return View();
         }
     }
 }

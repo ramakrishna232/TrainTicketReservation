@@ -30,11 +30,12 @@
                 
             </ul>
             <ul class="nav navbar-nav ">
-                <li class="text-info" style="top:10px;position:relative;left:800px;">
+                <li class="text-info" style="top:10px;position:relative;left:700px;">
                     Hi,@TempData["UserName"] <span class="glyphicon glyphicon-user" style="font-size:25px;"></span>
                     
                 </li>
-                <li style="position:relative;left:800px;">@Html.ActionLink("Logout", "LogOut", "User")</li>
+                <li style="position:relative;left:720px;">@Html.ActionLink("MyBookings","MyBookings","User")</li>
+                <li style="position:relative;left:750px;">@Html.ActionLink("Logout", "LogOut", "User")</li>
             </ul>
         </div>
 

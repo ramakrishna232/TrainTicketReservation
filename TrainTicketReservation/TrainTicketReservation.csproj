@@ -238,6 +238,7 @@
     <Content Include="Views\TrainFares\Edit.cshtml" />
     <Content Include="Views\TrainFares\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\User\MyBookings.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -1,0 +1,42 @@
+﻿@using System.Data.SqlClient;
+@using System.Configuration;
+@{
+    ViewBag.Title = "MyBookings";
+    Layout = "~/Views/Shared/Login.cshtml";
+}
+
+<h2>MyBookings</h2>
+
+@{ 
+    string Connection = ConfigurationManager.ConnectionStrings["SqlConnection"].ConnectionString;
+    SqlConnection sqlConnection = new SqlConnection(Connection);
+    sqlConnection.Open();
+    SqlCommand sqlCommand = new SqlCommand("select * from passengers where UserName='" + TempData["UserName"] + "'", sqlConnection);
+    SqlDataReader dataReader = sqlCommand.ExecuteReader();
+
+}
+<table class="table-bordered" style="position:relative;left:100px;width:800px;">
+    <tr>
+        <th style="text-align:center">Name</th>
+        <th style="text-align:center">Age</th>
+        <th style="text-align:center">Gender</th>
+        <th style="text-align:center">Berth</th>
+        <th style="text-align:center">Coach</th>
+        
+        <th style="text-align:center">BookedOn</th>
+    </tr>
+
+    @while (dataReader.Read())
+    {
+        <tr style="text-align:center">
+            <td>@dataReader.GetValue(0)</td>
+            <td>@dataReader.GetValue(1)</td>
+            <td>@dataReader.GetValue(2)</td>
+            <td>@dataReader.GetValue(3)</td>
+            <td>@dataReader.GetValue(4)</td>
+            
+            <td>@dataReader.GetValue(6)</td>
+        </tr>
+    }
+
+</table>
